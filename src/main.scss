@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap');
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+@import url('../node_modules/react-loader-spinner/dist/loader/css/react-spinner-loader.css');
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Roboto Mono', monospace;
+  color: #2c2c2c;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(44, 44, 44);
+}
+
+input {
+  padding: 5px 10px;
+  border: 1px solid rgb(144, 144, 144);
+  border-radius: 5px;
+
+  &:focus {
+    border: 1px solid #5dff80;
+    outline: none;
+  }
+}
+
+.Container {
+  margin: 0 auto;
+  width: 768px;
+}
+
+.Loader {
+  width: 100px;
+  margin: 0 auto;
+}
+
+.Header {
+  width: 100%;
+  background: rgb(41, 44, 241);
+  color: #fff;
+}
+
+.ListMenu {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.ListMenuItem {
+  &:first-child {
+    margin-right: 20px;
+  }
+}
+
+//
+.NavLink {
+  padding: 5px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+}
+
+.active-NavLink {
+  color: #fff;
+}
+
+//
+.HomeTitle {
+  padding-top: 25px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+.MoviesList {
+  display: flex;
+  flex-wrap: wrap;
+  // align-items: flex-start;
+  justify-content: space-between;
+  padding: 15px 0 25px;
+}
+
+.MoviesItem {
+  padding: 5px 5px 10px;
+  width: 150px;
+  height: auto;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s linear;
+  cursor: pointer;
+
+  &:hover {
+    transform: translate(-3px, -3px);
+  }
+
+  &:not(:nth-last-child(-n + 5)) {
+    margin-bottom: 15px;
+  }
+}
+
+.ItemMovieImg {
+  margin-bottom: 10px;
+}
+
+//
+.BackBtn {
+  min-width: 65px;
+  max-width: 100px;
+  padding: 10px;
+  display: block;
+  margin: 10px 0 30px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: rgb(96, 174, 238);
+}
+
+.SingleMovie {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  & p {
+    margin-bottom: 22px;
+  }
+}
+
+.PosterImg {
+  width: 250px;
+}
+
+.WrapperDetails {
+  width: 63%;
+}
+
+.MovieDetailsTitle {
+  margin-bottom: 7px;
+  font-size: 20px;
+}
+
+.MainTitle {
+  font-size: 28px;
+}
+
+.GenresMovie {
+  display: flex;
+
+  & li {
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
