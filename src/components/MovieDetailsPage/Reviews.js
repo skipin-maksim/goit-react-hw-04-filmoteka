@@ -1,18 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default function Reviews({ movieReviews }) {
-  return (
-    <div className="InfomationWrapper">
-      <ul className="MovieReviewsList">
-        {movieReviews.map(review => {
-          return (
-            <li key={review.id} className="MovieReviewsItem">
-              <h3>Author {review.author}</h3>
-              <p>{review.content}</p>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
+import { fetchReview } from '../../services/movieAPI';
+export default class Reviews extends Component {
+  state = { reviewsData: [] };
+
+  componentDidMount() {
+    const { match } = this.props;
+
+    fetchReview(match.params.movieId).then(res => {
+      const { results } = res;
+
+      this.setState({ reviewsData: results });
+    });
+  }
+
+  render() {
+    const { reviewsData } = this.state;
+
+    return (
+      <div className="InfomationWrapper">
+        {reviewsData.length > 0 && (
+          <ul className="MovieReviewsList">
+            {reviewsData.map(review => {
+              return (
+                <li key={review.id} className="MovieReviewsItem">
+                  <h3>Author: {review.author}</h3>
+                  <p>{review.content}</p>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+
+        {reviewsData.length === 0 && (
+          <p>We don't have any reviews for this movie.</p>
+        )}
+      </div>
+    );
+  }
 }

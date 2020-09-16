@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 
 import routes from '../../routes';
 
-import Container from '../Container';
+import Layout from '../Layout';
 
 export default function Navbar() {
   return (
     <header className="Header">
-      <Container>
+      <Layout>
         <nav className="Nav">
           <ul className="ListMenu">
             <li className="ListMenuItem">
@@ -32,7 +32,7 @@ export default function Navbar() {
             </li>
           </ul>
         </nav>
-      </Container>
+      </Layout>
     </header>
   );
 }

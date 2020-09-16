@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import { NavLink, Route } from 'react-router-dom';
 // import queryString from '../../utils/get-query-params';
 
-import {
-  fetchDetailsMovieAPI,
-  fetchReview,
-  fetchCase,
-} from '../../services/movieAPI';
+import { fetchDetailsMovieAPI, fetchReview } from '../../services/movieAPI';
 import routes from '../../routes';
 import { collectFullUrl } from '../../helpers/collectFullUrl';
 
-import Container from '../Container';
+import Container from '../Layout';
 import Loader from '../Loader/Loader';
 import Cast from './Cast';
 import Reviews from './Reviews';
@@ -34,44 +30,30 @@ export default class MovieDetailsPage extends Component {
     try {
       const { data } = await fetchDetailsMovieAPI(match.params.movieId);
 
-      const collectUrlImg = collectFullUrl(data);
-
-      this.setState({ movie: collectUrlImg });
+      this.setState({ movie: collectFullUrl(data) });
     } catch (error) {
     } finally {
       this.setState({ isLoader: false });
     }
+
+    console.log(this.state);
   };
 
   sliceReleaseDate = date => date.slice(0, 4);
 
-  handleOpenReviews = id => {
-    fetchReview(id).then(res => {
-      const { results } = res;
-
-      this.setState({ reviewsData: results });
-    });
-  };
-
-  handleOpenCast = id => {
-    fetchCase(id).then(results => {
-      this.setState({ castData: results });
-      console.log('fuf', results);
-    });
-  };
-
   handleGoBack = () => {
     const { location, history } = this.props;
+    console.log(location, history);
 
     if (location.state && location.state.from) {
+      console.log(location.state.from);
       history.push(location.state.from);
     }
   };
 
   render() {
-    const { movie, isLoader, reviewsData, castData } = this.state;
+    const { movie, isLoader } = this.state;
     const {
-      id,
       title,
       poster_path,
       genres,
@@ -82,10 +64,8 @@ export default class MovieDetailsPage extends Component {
 
     const { location, match } = this.props;
 
-    // const baseUrlImg = 'https://image.tmdb.org/t/p/w500';
-
     return (
-      <Container>
+      <>
         {isLoader && <Loader />}
 
         <button className="BackBtn" type="button" onClick={this.handleGoBack}>
@@ -113,9 +93,9 @@ export default class MovieDetailsPage extends Component {
             )}
           </div>
         </div>
-        <div>
+        <div className="AditionalInfomation">
           <h2>Aditional infomation</h2>
-          <ul>
+          <ul className="AditionalInfomationList">
             <li>
               <NavLink
                 to={{
@@ -123,7 +103,7 @@ export default class MovieDetailsPage extends Component {
                   state: { from: location.state.from },
                 }}
                 exact
-                onClick={() => this.handleOpenCast(id)}
+                className="InfomationBtn"
                 activeClassName="ActiveInfomationBtn"
               >
                 Cast
@@ -135,7 +115,7 @@ export default class MovieDetailsPage extends Component {
                   pathname: `${match.url}${routes.Reviews}`,
                   state: { from: location.state.from },
                 }}
-                onClick={() => this.handleOpenReviews(id)}
+                className="InfomationBtn"
                 activeClassName="ActiveInfomationBtn"
               >
                 Reviews
@@ -143,16 +123,10 @@ export default class MovieDetailsPage extends Component {
             </li>
           </ul>
 
-          <Route
-            path={`${match.path}${routes.Cast}`}
-            render={props => <Cast {...props} movieCast={castData} />}
-          />
-          <Route
-            path={`${match.path}${routes.Reviews}`}
-            render={props => <Reviews {...props} movieReviews={reviewsData} />}
-          />
+          <Route path={`${match.path}${routes.Cast}`} component={Cast} />
+          <Route path={`${match.path}${routes.Reviews}`} component={Reviews} />
         </div>
-      </Container>
+      </>
     );
   }
 }

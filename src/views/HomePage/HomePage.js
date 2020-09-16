@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Container from '../../components/Container';
+import Container from '../../components/Layout';
 import Loader from '../../components/Loader/Loader';
 import MoviesItem from '../../components/MoviesList/MoviesItem';
 
 export default function HomePage({ moviesData, isLoader, ...otherProps }) {
   return (
-    <Container>
+    <>
       <h2 className="HomeTitle">Popular today</h2>
 
       {isLoader && (
@@ -22,6 +22,6 @@ export default function HomePage({ moviesData, isLoader, ...otherProps }) {
           ))}
         </ul>
       )}
-    </Container>
+    </>
   );
 }
