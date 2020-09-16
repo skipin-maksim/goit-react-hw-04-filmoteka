@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Container from '../Container';
-import Loader from '../Loader/Loader';
-import MoviesItem from '../MoviesList/MoviesItem';
+import Container from '../../components/Container';
+import Loader from '../../components/Loader/Loader';
+import MoviesItem from '../../components/MoviesList/MoviesItem';
 
 export default function HomePage({ moviesData, isLoader, ...otherProps }) {
   return (

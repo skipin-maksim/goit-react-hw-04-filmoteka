@@ -126,14 +126,17 @@ input {
 
 //
 .BackBtn {
-  min-width: 65px;
-  max-width: 100px;
+  min-width: 100px;
+  max-width: 150px;
   padding: 10px;
   display: block;
   margin: 10px 0 30px;
   text-align: center;
   border-radius: 10px;
+  border: none;
   background-color: rgb(96, 174, 238);
+  cursor: pointer;
+  outline: none;
 }
 
 .SingleMovie {
@@ -171,4 +174,32 @@ input {
       margin-right: 10px;
     }
   }
+}
+
+//
+.ActiveInfomationBtn {
+  font-weight: 700;
+}
+
+//
+.MovieCastList {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+}
+
+.MovieCastItem {
+  padding: 5px;
+  width: 120px;
+  margin-bottom: 15px;
+  font-size: 12px;
+  text-align: center;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+
+  &:nth-child(8) {
+  }
+}
+
+.MovieCastName {
+  margin: 8px 0;
 }

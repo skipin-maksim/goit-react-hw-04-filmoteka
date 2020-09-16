@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import { fetchMoviePopularAPI } from '../../services/movieAPI';
+import routes from '../../routes';
+import { collectFullUrl } from '../../helpers/collectFullUrl';
 
 // import Container from '../Container';
 // import Loader from '../Loader/Loader';
 import Navbar from '../Navbar/Navbar';
-import HomePage from '../HomePage/HomePage';
-import MoviesPage from '../MoviesPage/MoviesPage';
+import HomePage from '../../views/HomePage/HomePage';
+import MoviesPage from '../../views/MoviesPage/MoviesPage';
 import MovieDetailsPage from '../MovieDetailsPage/MovieDetailsPage';
 
 class App extends Component {
@@ -31,8 +33,10 @@ class App extends Component {
     try {
       const { results } = await fetchMoviePopularAPI(page);
 
+      const collectUrlImg = collectFullUrl(results);
+
       this.setState(prevState => ({
-        films: [...prevState.films, ...results],
+        films: [...prevState.films, ...collectUrlImg],
         page: prevState.page + 1,
       }));
     } catch (error) {
@@ -50,15 +54,15 @@ class App extends Component {
 
         <Switch>
           <Route
-            path="/"
+            path={routes.HomePage}
             exact
             render={props => (
               <HomePage {...props} isLoader={isLoader} moviesData={films} />
             )}
           />
 
-          <Route path="/movies/:movieId" component={MovieDetailsPage} />
-          <Route path="/movies" component={MoviesPage} />
+          <Route path={routes.MoviesPage} exact component={MoviesPage} />
+          <Route path={routes.MovieDetailsPage} component={MovieDetailsPage} />
         </Switch>
       </>
     );

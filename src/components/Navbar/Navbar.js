@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import routes from '../../routes';
+
 import Container from '../Container';
 
 export default function Navbar() {
@@ -11,7 +13,7 @@ export default function Navbar() {
           <ul className="ListMenu">
             <li className="ListMenuItem">
               <NavLink
-                to="/"
+                to={routes.HomePage}
                 exact
                 className="NavLink"
                 activeClassName="active-NavLink"
@@ -21,7 +23,7 @@ export default function Navbar() {
             </li>
             <li className="ListMenuItem">
               <NavLink
-                to="/movies"
+                to={routes.MoviesPage}
                 className="NavLink"
                 activeClassName="active-NavLink"
               >
