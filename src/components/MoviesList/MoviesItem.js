@@ -3,16 +3,7 @@ import { Link } from 'react-router-dom';
 
 import routes from '../../routes';
 
-export default function MoviesItem({
-  id,
-  poster_path,
-  title,
-  match,
-  location,
-}) {
-  //todo
-  // const baseUrlImg = 'https://image.tmdb.org/t/p/w500';
-
+export default function MoviesItem({ id, poster_path, title, location }) {
   return (
     <li className="MoviesItem">
       <Link

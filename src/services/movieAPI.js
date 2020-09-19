@@ -9,9 +9,16 @@ export const fetchMoviePopularAPI = async (pageNum = 1) => {
       `/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&page=${pageNum}`,
     );
 
-    return request.data;
+    // throw new Error('ppc');
+
+    if (request) {
+      return request.data;
+    }
+
+    return [];
   } catch (err) {
-    throw err;
+    console.error(err);
+    return [];
   }
 };
 
@@ -19,9 +26,14 @@ export const fetchDetailsMovieAPI = async id => {
   try {
     const request = await axios.get(`/movie/${id}?api_key=${apiKey}`);
 
-    return request;
+    if (request) {
+      return request;
+    }
+
+    return [];
   } catch (err) {
-    throw err;
+    console.error(err);
+    return [];
   }
 };
 
@@ -29,9 +41,14 @@ export const fetchReview = async id => {
   try {
     const request = await axios.get(`movie/${id}/reviews?api_key=${apiKey}`);
 
-    return request.data;
+    if (request) {
+      return request.data;
+    }
+
+    return [];
   } catch (err) {
-    throw err;
+    console.error(err);
+    return [];
   }
 };
 
@@ -39,11 +56,34 @@ export const fetchCase = async id => {
   try {
     const request = await axios.get(`movie/${id}/credits?api_key=${apiKey}`);
 
-    return request.data;
+    if (request) {
+      return request.data;
+    }
+
+    return [];
   } catch (err) {
-    throw err;
+    console.error(err);
+    return [];
   }
 };
 
-// https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>
-// https://api.themoviedb.org/3/movie/724989?api_key=cc24e28d216ef164940b9fd9893ff62a&language=en-US
+export const fetchSearchMovie = async searchValue => {
+  if (!searchValue) {
+    return;
+  }
+
+  try {
+    const request = await axios.get(
+      `/search/movie?query=${searchValue}&page=1&api_key=${apiKey}`,
+    );
+
+    if (request) {
+      return request.data.results;
+    }
+
+    return [];
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+};

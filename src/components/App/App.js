@@ -3,9 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import { fetchMoviePopularAPI } from '../../services/movieAPI';
 import routes from '../../routes';
-import { collectFullUrl } from '../../helpers/collectFullUrl';
+import { collectFullUrlInArrayMovies } from '../../helpers/collectFullUrl';
 
-// import Loader from '../Loader/Loader';
 import Layout from '../Layout';
 import Navbar from '../Navbar/Navbar';
 import HomePage from '../../views/HomePage/HomePage';
@@ -30,19 +29,15 @@ class App extends Component {
 
     this.setState({ isLoader: true });
 
-    try {
-      const { results } = await fetchMoviePopularAPI(page);
+    const { results } = await fetchMoviePopularAPI(page);
 
-      const collectUrlImg = collectFullUrl(results);
+    const newArrMovies = collectFullUrlInArrayMovies(results);
 
-      this.setState(prevState => ({
-        films: [...prevState.films, ...collectUrlImg],
-        page: prevState.page + 1,
-      }));
-    } catch (error) {
-    } finally {
-      this.setState({ isLoader: false });
-    }
+    this.setState({
+      films: newArrMovies,
+    });
+
+    this.setState({ isLoader: false });
   };
 
   render() {

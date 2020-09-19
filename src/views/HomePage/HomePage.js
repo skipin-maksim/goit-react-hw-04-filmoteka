@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Container from '../../components/Layout';
 import Loader from '../../components/Loader/Loader';
 import MoviesItem from '../../components/MoviesList/MoviesItem';
 

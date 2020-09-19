@@ -243,3 +243,26 @@ input {
   font-size: 14px;
   background-color: #fff;
 }
+
+//@at-root
+.FormSearch {
+  padding: 20px;
+  display: flex;
+}
+
+.Search {
+  width: 100%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.SubmitBtn {
+  padding: 5px 15px;
+  border: 1px solid rgb(144, 144, 144);
+  border-left: none;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  cursor: pointer;
+  outline: none;
+}

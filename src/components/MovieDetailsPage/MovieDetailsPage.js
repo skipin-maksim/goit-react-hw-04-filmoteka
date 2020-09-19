@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { NavLink, Route } from 'react-router-dom';
 // import queryString from '../../utils/get-query-params';
 
-import { fetchDetailsMovieAPI, fetchReview } from '../../services/movieAPI';
+import { fetchDetailsMovieAPI } from '../../services/movieAPI';
 import routes from '../../routes';
-import { collectFullUrl } from '../../helpers/collectFullUrl';
+import { collectFullUrlInOneMovie } from '../../helpers/collectFullUrl';
 
-import Container from '../Layout';
 import Loader from '../Loader/Loader';
 import Cast from './Cast';
 import Reviews from './Reviews';
@@ -27,28 +26,34 @@ export default class MovieDetailsPage extends Component {
 
     this.setState({ isLoader: true });
 
-    try {
-      const { data } = await fetchDetailsMovieAPI(match.params.movieId);
+    const { data } = await fetchDetailsMovieAPI(match.params.movieId);
+    const newArrMovies = collectFullUrlInOneMovie(data);
 
-      this.setState({ movie: collectFullUrl(data) });
-    } catch (error) {
-    } finally {
-      this.setState({ isLoader: false });
-    }
+    console.log(newArrMovies);
 
-    console.log(this.state);
+    this.setState({ movie: newArrMovies });
+
+    this.setState({ isLoader: false });
   };
-
-  sliceReleaseDate = date => date.slice(0, 4);
 
   handleGoBack = () => {
     const { location, history } = this.props;
-    console.log(location, history);
 
     if (location.state && location.state.from) {
-      console.log(location.state.from);
-      history.push(location.state.from);
+      return history.push(location.state.from);
     }
+
+    return history.push(routes.MoviesPage);
+  };
+
+  checkLocationState = () => {
+    const { state } = this.props.location;
+
+    if (state && state.from) {
+      return state.from;
+    }
+
+    return '';
   };
 
   render() {
@@ -62,11 +67,15 @@ export default class MovieDetailsPage extends Component {
       release_date,
     } = movie;
 
-    const { location, match } = this.props;
+    const { match } = this.props;
 
     return (
       <>
-        {isLoader && <Loader />}
+        {isLoader && (
+          <div className="Loader">
+            <Loader />
+          </div>
+        )}
 
         <button className="BackBtn" type="button" onClick={this.handleGoBack}>
           Back
@@ -76,7 +85,7 @@ export default class MovieDetailsPage extends Component {
           <img className="PosterImg" src={poster_path} alt={title} />
           <div className="WrapperDetails">
             <h2 className="MovieDetailsTitle MainTitle">
-              {title} ({release_date && this.sliceReleaseDate(release_date)})
+              {title} ({release_date})
             </h2>
             <p>User Score: {vote_average * 10}%</p>
 
@@ -100,7 +109,7 @@ export default class MovieDetailsPage extends Component {
               <NavLink
                 to={{
                   pathname: `${match.url}${routes.Cast}`,
-                  state: { from: location.state.from },
+                  state: { from: this.checkLocationState() },
                 }}
                 exact
                 className="InfomationBtn"
@@ -113,7 +122,7 @@ export default class MovieDetailsPage extends Component {
               <NavLink
                 to={{
                   pathname: `${match.url}${routes.Reviews}`,
-                  state: { from: location.state.from },
+                  state: { from: this.checkLocationState() },
                 }}
                 className="InfomationBtn"
                 activeClassName="ActiveInfomationBtn"
