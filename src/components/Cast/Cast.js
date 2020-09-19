@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { fetchCase } from '../../services/movieAPI';
+import { fetchCast } from '../../services/movieAPI';
 import replaceUrl from '../../helpers/replaceUrl';
 
 export default class Cast extends Component {
@@ -15,7 +15,7 @@ export default class Cast extends Component {
 
     this.setState({ isLoader: true });
 
-    const { cast } = await fetchCase(id);
+    const { cast } = await fetchCast(id);
 
     this.setState({ castData: replaceUrl(cast) });
     this.setState({ isLoader: false });

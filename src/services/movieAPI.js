@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+import redirectToHomePage from '../helpers/redirectToHomePage';
+import routes from '../routes';
+
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 const apiKey = 'cc24e28d216ef164940b9fd9893ff62a';
 
@@ -8,8 +11,6 @@ export const fetchMoviePopularAPI = async (pageNum = 1) => {
     const request = await axios.get(
       `/discover/movie?sort_by=popularity.desc&api_key=${apiKey}&page=${pageNum}`,
     );
-
-    // throw new Error('ppc');
 
     if (request) {
       return request.data;
@@ -22,7 +23,7 @@ export const fetchMoviePopularAPI = async (pageNum = 1) => {
   }
 };
 
-export const fetchDetailsMovieAPI = async id => {
+export const fetchDetailsMovieAPI = async (id, history) => {
   try {
     const request = await axios.get(`/movie/${id}?api_key=${apiKey}`);
 
@@ -32,7 +33,8 @@ export const fetchDetailsMovieAPI = async id => {
 
     return [];
   } catch (err) {
-    console.error(err);
+    redirectToHomePage(history, routes.HomePage);
+
     return [];
   }
 };
@@ -52,7 +54,7 @@ export const fetchReview = async id => {
   }
 };
 
-export const fetchCase = async id => {
+export const fetchCast = async id => {
   try {
     const request = await axios.get(`movie/${id}/credits?api_key=${apiKey}`);
 

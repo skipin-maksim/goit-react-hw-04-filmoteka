@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { fetchReview } from '../../services/movieAPI';
-
 export default class Reviews extends Component {
   state = { reviewsData: [] };
 

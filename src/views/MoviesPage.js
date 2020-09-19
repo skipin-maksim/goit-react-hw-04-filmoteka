@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import { fetchSearchMovie } from '../../services/movieAPI';
-import { collectFullUrlInArrayMovies } from '../../helpers/collectFullUrl';
-import getQueryParams from '../../utils/get-query-params';
+import { fetchSearchMovie } from '../services/movieAPI';
+import { collectFullUrlInArrayMovies } from '../helpers/collectFullUrl';
+import getQueryParams from '../utils/get-query-params';
 
-import Loader from '../../components/Loader/Loader';
-import SearchForm from '../../components/SearchForm/SearchForm';
-import MoviesList from '../../components/MoviesList/MoviesList';
+import Loader from '../components/Loader/Loader';
+import SearchForm from '../components/SearchForm/SearchForm';
+import MoviesList from '../components/MoviesList/MoviesList';
 
 export default class MoviesPage extends Component {
   state = {

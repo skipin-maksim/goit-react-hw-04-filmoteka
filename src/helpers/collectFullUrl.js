@@ -16,14 +16,14 @@ const collectFullUrlInArrayMovies = results => {
 };
 
 const collectFullUrlInOneMovie = results => {
-  if (results.poster_path) {
+  if (results && results.poster_path) {
     results.poster_path = `${baseUrlImg}${results.poster_path}`;
   } else {
     results.poster_path =
       'https://rudnichka.ru/wp-content/uploads/2020/07/dquestion_app_widget_2_c.png';
   }
 
-  if (results.release_date) {
+  if (results && results.release_date) {
     results.release_date = results.release_date.slice(0, 4);
   }
 

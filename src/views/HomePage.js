@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import { collectFullUrlInArrayMovies } from '../../helpers/collectFullUrl';
-import { fetchMoviePopularAPI } from '../../services/movieAPI';
+import { collectFullUrlInArrayMovies } from '../helpers/collectFullUrl';
+import { fetchMoviePopularAPI } from '../services/movieAPI';
 
-import Loader from '../../components/Loader/Loader';
-import MoviesItem from '../../components/MoviesList/MoviesItem';
+import Loader from '../components/Loader/Loader';
+import MoviesItem from '../components/MoviesList/MoviesItem';
 
 export default class HomePage extends Component {
   state = {
