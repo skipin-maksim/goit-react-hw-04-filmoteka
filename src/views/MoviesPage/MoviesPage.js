@@ -5,8 +5,8 @@ import { collectFullUrlInArrayMovies } from '../../helpers/collectFullUrl';
 import getQueryParams from '../../utils/get-query-params';
 
 import Loader from '../../components/Loader/Loader';
-import MoviesItem from '../../components/MoviesList/MoviesItem';
 import SearchForm from '../../components/SearchForm/SearchForm';
+import MoviesList from '../../components/MoviesList/MoviesList';
 
 export default class MoviesPage extends Component {
   state = {
@@ -17,10 +17,11 @@ export default class MoviesPage extends Component {
 
   componentDidMount() {
     const { location } = this.props;
+
     if (location.search) {
       const { query } = getQueryParams(location.search);
 
-      this.searchFetch(query);
+      this.onSearchFetch(query);
     }
   }
 
@@ -31,24 +32,21 @@ export default class MoviesPage extends Component {
     const { query: nextQuery } = getQueryParams(location.search);
 
     if (prevQuery !== nextQuery) {
-      this.searchFetch(nextQuery);
+      this.onSearchFetch(nextQuery);
     }
   }
 
-  searchFetch = async query => {
+  onSearchFetch = async query => {
     this.setState({ isLoader: true });
 
-    try {
-      const results = await fetchSearchMovie(query);
-      const newArrMovies = collectFullUrlInArrayMovies(results);
+    const results = await fetchSearchMovie(query);
+    const newArrMovies = collectFullUrlInArrayMovies(results);
 
-      this.setState({
-        movies: newArrMovies,
-      });
-    } catch (error) {
-    } finally {
-      this.setState({ isLoader: false });
-    }
+    this.setState({
+      movies: newArrMovies,
+    });
+
+    this.setState({ isLoader: false });
   };
 
   getSearchQuery = query => {
@@ -93,13 +91,7 @@ export default class MoviesPage extends Component {
           </div>
         )}
 
-        {movies.length > 0 && (
-          <ul className="MoviesList">
-            {movies.map(({ id, ...moviesProps }) => (
-              <MoviesItem key={id} id={id} {...moviesProps} {...this.props} />
-            ))}
-          </ul>
-        )}
+        {movies.length > 0 && <MoviesList movies={movies} {...this.props} />}
       </>
     );
   }

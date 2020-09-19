@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { NavLink, Route } from 'react-router-dom';
-// import queryString from '../../utils/get-query-params';
 
 import { fetchDetailsMovieAPI } from '../../services/movieAPI';
-import routes from '../../routes';
 import { collectFullUrlInOneMovie } from '../../helpers/collectFullUrl';
+import routes from '../../routes';
 
-import Loader from '../Loader/Loader';
-import Cast from './Cast';
-import Reviews from './Reviews';
+import Loader from '../../components/Loader/Loader';
+import CastComponent from '../../components/Cast/Cast';
+import ReviewsComponent from '../../components/Reviews/Reviews';
+
 export default class MovieDetailsPage extends Component {
   state = {
     movie: {},
@@ -28,8 +28,6 @@ export default class MovieDetailsPage extends Component {
 
     const { data } = await fetchDetailsMovieAPI(match.params.movieId);
     const newArrMovies = collectFullUrlInOneMovie(data);
-
-    console.log(newArrMovies);
 
     this.setState({ movie: newArrMovies });
 
@@ -67,7 +65,8 @@ export default class MovieDetailsPage extends Component {
       release_date,
     } = movie;
 
-    const { match } = this.props;
+    const { path, url } = this.props.match;
+    const { Cast, Reviews } = routes;
 
     return (
       <>
@@ -108,7 +107,7 @@ export default class MovieDetailsPage extends Component {
             <li>
               <NavLink
                 to={{
-                  pathname: `${match.url}${routes.Cast}`,
+                  pathname: `${url}${Cast}`,
                   state: { from: this.checkLocationState() },
                 }}
                 exact
@@ -121,7 +120,7 @@ export default class MovieDetailsPage extends Component {
             <li>
               <NavLink
                 to={{
-                  pathname: `${match.url}${routes.Reviews}`,
+                  pathname: `${url}${Reviews}`,
                   state: { from: this.checkLocationState() },
                 }}
                 className="InfomationBtn"
@@ -132,8 +131,8 @@ export default class MovieDetailsPage extends Component {
             </li>
           </ul>
 
-          <Route path={`${match.path}${routes.Cast}`} component={Cast} />
-          <Route path={`${match.path}${routes.Reviews}`} component={Reviews} />
+          <Route path={`${path}${Cast}`} component={CastComponent} />
+          <Route path={`${path}${Reviews}`} component={ReviewsComponent} />
         </div>
       </>
     );
