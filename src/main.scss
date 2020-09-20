@@ -62,3 +62,30 @@ input {
   justify-content: space-between;
   padding: 15px 0 25px;
 }
+
+.InfomationWrapper {
+  padding: 30px;
+  background-color: #e9e9e9;
+}
+
+.AditionalInfomationList {
+  display: flex;
+
+  & li {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.InfomationBtn {
+  padding: 10px;
+  display: block;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  text-align: center;
+}
+
+.ActiveInfomationBtn {
+  font-weight: 700;
+  background-color: #e9e9e9;
+}
