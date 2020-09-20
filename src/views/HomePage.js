@@ -4,7 +4,9 @@ import { collectFullUrlInArrayMovies } from '../helpers/collectFullUrl';
 import { fetchMoviePopularAPI } from '../services/movieAPI';
 
 import Loader from '../components/Loader/Loader';
-import MoviesItem from '../components/MoviesList/MoviesItem';
+import MoviesList from '../components/MoviesList/MoviesList';
+
+import s from './allViewsStyles.module.scss';
 
 export default class HomePage extends Component {
   state = {
@@ -37,7 +39,7 @@ export default class HomePage extends Component {
 
     return (
       <>
-        <h2 className="HomeTitle">Popular today</h2>
+        <h2 className={s.HomeTitle}>Popular today</h2>
 
         {isLoader && (
           <div className="Loader">
@@ -45,13 +47,7 @@ export default class HomePage extends Component {
           </div>
         )}
 
-        {movies.length > 0 && (
-          <ul className="MoviesList">
-            {movies.map(({ id, ...moviesProps }) => (
-              <MoviesItem key={id} id={id} {...moviesProps} {...this.props} />
-            ))}
-          </ul>
-        )}
+        {movies.length > 0 && <MoviesList movies={movies} {...this.props} />}
       </>
     );
   }

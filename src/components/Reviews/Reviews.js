@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
 import { fetchReview } from '../../services/movieAPI';
+
+import s from './Reviews.module.scss';
 export default class Reviews extends Component {
-  state = { reviewsData: [] };
+  state = { reviewsData: [], reviewId: '' };
 
   async componentDidMount() {
     const { match } = this.props;
@@ -12,18 +14,44 @@ export default class Reviews extends Component {
     this.setState({ reviewsData: results });
   }
 
+  toggleShowFullReview = id => {
+    /* non-homework function */
+    const { reviewId } = this.state;
+
+    this.setState(prevState => {
+      if (prevState !== reviewId) {
+        return { reviewId: id };
+      }
+    });
+
+    if (reviewId === id) {
+      return this.setState({ reviewId: '' });
+    }
+  };
+
   render() {
-    const { reviewsData } = this.state;
+    const { reviewsData, reviewId } = this.state;
 
     return (
-      <div className="InfomationWrapper">
+      <div className={s.InfomationWrapper}>
         {reviewsData.length > 0 && (
-          <ul className="MovieReviewsList">
+          <ul className={s.MovieReviewsList}>
             {reviewsData.map(review => {
               return (
-                <li key={review.id} className="MovieReviewsItem">
+                <li key={review.id} className={s.MovieReviewsItem}>
                   <h3>Author: {review.author}</h3>
-                  <p>{review.content}</p>
+                  {reviewId === review.id && <p>{review.content}</p>}
+                  {reviewId !== review.id && (
+                    <p>{review.content.slice(0, 250)}</p>
+                  )}
+
+                  <button
+                    className={s.ReviewsMoreBtn}
+                    type="button"
+                    onClick={() => this.toggleShowFullReview(review.id)}
+                  >
+                    {reviewId === review.id ? ' Hide review' : 'Show review'}
+                  </button>
                 </li>
               );
             })}

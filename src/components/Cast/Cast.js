@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { fetchCast } from '../../services/movieAPI';
 import replaceUrl from '../../helpers/replaceUrl';
 
+import s from './Cast.module.scss';
+
 export default class Cast extends Component {
   state = { castData: [] };
 
@@ -21,14 +23,14 @@ export default class Cast extends Component {
     const { castData, isLoader } = this.state;
 
     return (
-      <div className="InfomationWrapper">
+      <div className={s.InfomationWrapper}>
         {!isLoader && castData && (
-          <ul className="MovieCastList">
+          <ul className={s.MovieCastList}>
             {castData.map(cast => {
               return (
-                <li key={cast.cast_id} className="MovieCastItem">
+                <li key={cast.cast_id} className={s.MovieCastItem}>
                   <img src={cast.profile_path} alt={cast.name} />
-                  <h3 className="MovieCastName">Name: {cast.name}</h3>
+                  <h3 className={s.MovieCastName}>Name: {cast.name}</h3>
                   <div>Character: {cast.character}</div>
                 </li>
               );

@@ -9,6 +9,8 @@ import Loader from '../components/Loader/Loader';
 import SingleMovie from '../components/SingleMovie/SingleMovie';
 import AditionalInfomationList from '../components/AditionalInfomationList/AditionalInfomationList';
 
+import s from './allViewsStyles.module.scss';
+
 const AsyncCast = lazy(() =>
   import('../components/Cast/Cast' /* webpackChunkName: "details-cast" */),
 );
@@ -77,13 +79,13 @@ export default class MovieDetailsPage extends Component {
           </div>
         )}
 
-        <button className="BackBtn" type="button" onClick={this.handleGoBack}>
+        <button className={s.BackBtn} type="button" onClick={this.handleGoBack}>
           Back
         </button>
 
         <SingleMovie movie={movie} />
 
-        <div className="AditionalInfomation">
+        <div className={s.AditionalInfomation}>
           <h2>Aditional infomation</h2>
 
           <AditionalInfomationList

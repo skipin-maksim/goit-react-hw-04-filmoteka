@@ -1,5 +1,7 @@
 import React from 'react';
 
+import s from './SingleMovie.module.scss';
+
 export default function SingleMovie({ movie }) {
   const {
     title,
@@ -11,20 +13,20 @@ export default function SingleMovie({ movie }) {
   } = movie;
 
   return (
-    <div className="SingleMovie">
-      <img className="PosterImg" src={poster_path} alt={title} />
-      <div className="WrapperDetails">
-        <h2 className="MovieDetailsTitle MainTitle">
+    <div className={s.SingleMovie}>
+      <img className={s.PosterImg} src={poster_path} alt={title} />
+      <div className={s.WrapperDetails}>
+        <h2 className={(s.MovieDetailsTitle, s.MainTitle)}>
           {title} ({release_date})
         </h2>
         <p>User Score: {vote_average * 10}%</p>
 
-        <h2 className="MovieDetailsTitle">Overview</h2>
+        <h2 className={s.MovieDetailsTitle}>Overview</h2>
         <p>{overview}</p>
-        <h2 className="MovieDetailsTitle">Genres</h2>
+        <h2 className={s.MovieDetailsTitle}>Genres</h2>
 
         {genres && (
-          <ul className="GenresMovie">
+          <ul className={s.GenresMovie}>
             {genres.map(genre => (
               <li key={genre.id}>{genre.name}</li>
             ))}

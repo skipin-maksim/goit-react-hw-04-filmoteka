@@ -1,0 +1,27 @@
+.FormSearch {
+  padding: 20px;
+  display: flex;
+}
+
+.Search {
+  width: 100%;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.SubmitBtn {
+  padding: 5px 15px;
+  border: 1px solid #909090;
+  background-color: #60aeee;
+  border-left: none;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s linear;
+
+  &:active {
+    background-color: #d2ebff;
+  }
+}

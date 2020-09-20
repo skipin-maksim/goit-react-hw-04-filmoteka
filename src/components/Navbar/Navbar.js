@@ -5,27 +5,29 @@ import routes from '../../routes';
 
 import Layout from '../Layout';
 
+import s from './Navbar.module.scss';
+
 export default function Navbar() {
   return (
-    <header className="Header">
+    <header className={s.Header}>
       <Layout>
-        <nav className="Nav">
-          <ul className="ListMenu">
-            <li className="ListMenuItem">
+        <nav className={s.Nav}>
+          <ul className={s.ListMenu}>
+            <li className={s.ListMenuItem}>
               <NavLink
                 to={routes.HomePage}
                 exact
-                className="NavLink"
-                activeClassName="active-NavLink"
+                className={s.NavLink}
+                activeClassName={s.activeNavLink}
               >
                 Home
               </NavLink>
             </li>
-            <li className="ListMenuItem">
+            <li className={s.ListMenuItem}>
               <NavLink
                 to={routes.MoviesPage}
-                className="NavLink"
-                activeClassName="active-NavLink"
+                className={s.NavLink}
+                activeClassName={s.activeNavLink}
               >
                 Movies
               </NavLink>

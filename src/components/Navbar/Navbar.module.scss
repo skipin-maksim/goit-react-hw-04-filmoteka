@@ -1,0 +1,28 @@
+.Header {
+  width: 100%;
+  background: rgb(41, 44, 241);
+  color: #fff;
+}
+
+.ListMenu {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.ListMenuItem {
+  &:first-child {
+    margin-right: 20px;
+  }
+}
+
+.NavLink {
+  padding: 5px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+}
+
+.activeNavLink {
+  color: #fff;
+}

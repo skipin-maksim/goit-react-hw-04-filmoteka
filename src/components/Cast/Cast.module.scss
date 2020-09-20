@@ -1,0 +1,24 @@
+.InfomationWrapper {
+  padding: 30px;
+  background-color: #e9e9e9;
+}
+
+.MovieCastList {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+}
+
+.MovieCastItem {
+  padding: 5px;
+  width: 150px;
+  margin-bottom: 15px;
+  font-size: 12px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.MovieCastName {
+  margin: 8px 0;
+}
