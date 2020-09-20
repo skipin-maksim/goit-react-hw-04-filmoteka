@@ -47,7 +47,8 @@ input {
 
 .Container {
   margin: 0 auto;
-  width: 768px;
+  max-width: 768px;
+  padding: 0px 10px;
 }
 
 .Loader {
@@ -141,6 +142,7 @@ input {
 
 .SingleMovie {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
 

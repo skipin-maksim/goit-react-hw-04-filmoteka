@@ -4,17 +4,13 @@ import { fetchReview } from '../../services/movieAPI';
 export default class Reviews extends Component {
   state = { reviewsData: [] };
 
-  componentDidMount() {
-    this.onLoadReviewsOnMoviePage();
-  }
-
-  onLoadReviewsOnMoviePage = async () => {
+  async componentDidMount() {
     const { match } = this.props;
 
     const { results } = await fetchReview(match.params.movieId);
 
     this.setState({ reviewsData: results });
-  };
+  }
 
   render() {
     const { reviewsData } = this.state;

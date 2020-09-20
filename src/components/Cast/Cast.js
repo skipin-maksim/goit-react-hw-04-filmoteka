@@ -6,11 +6,7 @@ import replaceUrl from '../../helpers/replaceUrl';
 export default class Cast extends Component {
   state = { castData: [] };
 
-  componentDidMount() {
-    this.onLoadCastsOnMoviePage();
-  }
-
-  onLoadCastsOnMoviePage = async () => {
+  async componentDidMount() {
     const id = this.props.match.params.movieId;
 
     this.setState({ isLoader: true });
@@ -19,7 +15,7 @@ export default class Cast extends Component {
 
     this.setState({ castData: replaceUrl(cast) });
     this.setState({ isLoader: false });
-  };
+  }
 
   render() {
     const { castData, isLoader } = this.state;
